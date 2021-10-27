@@ -64,10 +64,10 @@
 #' @examples
 #' # For complete graphs only the CC parameter is used.
 #' # For instance:
-#' # # bootMargin(CC = AA, thr = 0.5, reps = 500)
+#' bootMargin(CC = AA, thr = 0.5, reps = 500)
 #' # For chain bipartite graphs the parameters CC, CE and EE are used.
 #' # For instance:
-#' # # bootMargin(CC = AA, CE = AB, EE = BB, thr = 0.5, reps = 500)
+#' bootMargin(CC = AA, CE = AB, EE = BB, thr = 0.5, reps = 500)
 bootMargin <-function(CC, CE= NULL, EE= NULL,  thr = 0.5, reps=10000, conf.level = 0.95, delete=FALSE, plot = FALSE){
   output <- wrapper.BootMargin(CC = CC, CE = CE, EE = EE, thr=thr, reps=reps, conf.level =conf.level, delete=delete, plot=plot)
   return(output)

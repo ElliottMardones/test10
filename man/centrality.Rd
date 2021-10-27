@@ -72,8 +72,8 @@ The parallel and ncpus options are not available on Windows operating systems.
 \examples{
 # For complete graphs only the CC parameter is used.
 # For instance:
-# # centrality( CC = AA, model = "median", reps = 100, parallel = "no", ncpus = 1)
+centrality( CC = AA, model = "median", reps = 100, parallel = "no", ncpus = 1)
 # For chain bipartite graphs the parameters CC, CE and EE are used.
 # For instance:
-# # centrality( CC = AA, CE = AB, EE= BB, model = "median", reps = 50)
+centrality( CC = AA, CE = AB, EE= BB, model = "median", reps = 50)
 }

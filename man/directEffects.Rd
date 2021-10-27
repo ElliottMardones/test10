@@ -62,8 +62,8 @@ If you use the full graph mode, make sure to keep the default values of the CE a
 
 #' # For complete graphs only the CC parameter is used.
 # For instance:
-# # directEffects(CC = AA, thr = 0.5, conf.level=0.95, reps = 100, delete = FALSE)
+directEffects(CC = AA, thr = 0.5, conf.level=0.95, reps = 100, delete = FALSE)
 # For chain bipartite graphs the parameters CC, CE and EE are used.
 # For instance:
-# # directEffects(CC = AA, CE = AB, EE = BB, thr = 0.5, conf.level=0.95, reps = 100, delete = FALSE)
+directEffects(CC = AA, CE = AB, EE = BB, thr = 0.5, conf.level=0.95, reps = 100, delete = FALSE)
 }

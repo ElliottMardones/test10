@@ -82,8 +82,8 @@ If you use the full graph mode, make sure to keep the default values of the CE a
 \examples{
 # For complete graphs only the CC parameter is used.
 # For instance:
-# # bootMargin(CC = AA, thr = 0.5, reps = 500)
+bootMargin(CC = AA, thr = 0.5, reps = 500)
 # For chain bipartite graphs the parameters CC, CE and EE are used.
 # For instance:
-# # bootMargin(CC = AA, CE = AB, EE = BB, thr = 0.5, reps = 500)
+bootMargin(CC = AA, CE = AB, EE = BB, thr = 0.5, reps = 500)
 }

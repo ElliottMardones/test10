@@ -2,9 +2,9 @@ Package: test10
 Type: Package
 Title: DOS TREINTA Y CINCO am
 Version: 0.1.0
-Authors@R: c(person("Elliott", "Mardones", email = "emardones@alu.uct.cl", role = c("aut", "cre")),
+Authors@R: c(person("Elliott", "Mardones", email = "emardones2016@alu.uct.cl", role = c("aut", "cre")),
               person("Julio", "Rojas-Mora", email = "jrojas@inf.uct.cl", role = "aut"))
-Maintainer: The package maintainer <emardones@alu.uct.cl>
+Maintainer: The package maintainer <emardones2016@alu.uct.cl>
 Description: La biblioteca <nombre.pkg> extiende la teoría de los efectos olvidados para múltiples
              informantes clave con grafos completos y grafos bipartitos encadenados. 
              Proporciona herramientas de análisis de significancia unilateral izquierda para aristas, 

@@ -1,11 +1,15 @@
 Package: test10
 Type: Package
-Title: What the Package Does (Title Case)
+Title: DOS TREINTA Y CINCO am
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: c(person("Elliott", "Mardones", email = "emardones@alu.uct.cl", role = c("aut", "cre")),
+              person("Julio", "Rojas-Mora", email = "jrojas@inf.uct.cl", role = "aut"))
+Maintainer: The package maintainer <emardones@alu.uct.cl>
+Description: La biblioteca <nombre.pkg> extiende la teoría de los efectos olvidados para múltiples
+             informantes clave con grafos completos y grafos bipartitos encadenados. 
+             Proporciona herramientas de análisis de significancia unilateral izquierda para aristas, 
+             significancia bilateral para nodos y centralidad betweenness mediana para matrices
+             de primer orden.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

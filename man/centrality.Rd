@@ -2,7 +2,7 @@
 % Please edit documentation in R/centrality.R
 \name{centrality}
 \alias{centrality}
-\title{centrality}
+\title{Centrality For Complete and Chain Bipartite Graphs}
 \usage{
 centrality(
   CC,
@@ -16,30 +16,64 @@ centrality(
 )
 }
 \arguments{
-\item{CC}{centrality}
+\item{CC}{Three-dimensional matrix, where each submatrix along the z-axis is
+a square and reflective incidence matrix, or a list of data.frames
+containing square and reflective incidence matrices. Each matrix
+represents a complete graph.}
 
-\item{CE}{ce}
+\item{CE}{Three-dimensional matrix, where each submatrix along the z-axis is a
+rectangular incidence matrix, or a list of data.frames containing
+rectangular incidence matrices. Each matrix represents a bipartite graph.
+ By default CE = NULL.}
 
-\item{EE}{ee}
+\item{EE}{Three-dimensional matrix, where each submatrix along the z-axis is a
+square and reflective incidence matrix, or a list of data.frames
+containing square and reflective incidence matrices. Each matrix
+represents a complete graph. By default EE = NULL.}
 
-\item{model}{centrality}
+\item{model}{Bootstrap with one of the following statistics: "conpl","conlnorm","median".
+By default Model = "median".}
 
-\item{reps}{centrality}
+\item{reps}{The number of bootstrap replicas. By default reps = 10,000.}
 
-\item{conf}{centrality}
+\item{conf}{Real: Indicates the confidence levels of the required intervals. By default conf = 0.95.}
 
-\item{parallel}{centrality}
+\item{parallel}{The type of parallel operation to use (if applicable). The options are "multicore", "snow" and "no". By default parallel = "no".}
 
-\item{ncpus}{centrality}
+\item{ncpus}{Integer: Number of processes that will be used in the parallel implementation.}
 }
 \value{
-centrality
+Returns a data.frame containing the following:
+\itemize{
+ \item{Median: }{Calculated median.}
+ \item{LCI: }{Lower confidence interval.}
+ \item{UCI: }{Upper confidence interval.}
+ \item{Method: }{Statistical method used.}
+}
 }
 \description{
+Performs the calculation of the median betweenness centrality, confidence intervals
+ and the selected method for the calculation of the distribution of centralities with multiple
+  key informants for complete graphs and chain bipartite graphs.
+}
+\details{
 centrality
+
+The function implements "boot" from the boot package to obtain the confidence intervals and the p-value.
+
+The function contemplates two modalities, the first is focused on complete graphs and the second for chained bipartite graphs.
+
+If you use the full graph mode, make sure to keep the default values of the CE and EE parameters.
+
+The model parameter makes use of the PoweRlaw package. For "conpl" the median of a power distribution is calculated according to Newman, M. E. (2005), or "conlnorm" can be used according to Gillespie CS (2015). In the event that either of the two statistical methods fails, the error will be reported and the median centrality will be calculated.
+
+The parallel and ncpus options are not available on Windows operating systems.
 }
 \examples{
-c1 <- centrality( CC = AA, model = "median", reps = 100, parallel = "no", ncpus = 1)
-c2 <- centrality( CC = AA, model = "conpl", reps = 100, parallel = "no", ncpus = 1)
-c3 <- centrality( CC = AA, model = "conlnorm", reps = 100, parallel = "no", ncpus = 1)
+# For complete graphs only the CC parameter is used.
+# For instance:
+# # centrality( CC = AA, model = "median", reps = 100, parallel = "no", ncpus = 1)
+# For chain bipartite graphs the parameters CC, CE and EE are used.
+# For instance:
+# # centrality( CC = AA, CE = AB, EE= BB, model = "median", reps = 50)
 }

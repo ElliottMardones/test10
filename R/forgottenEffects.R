@@ -2,8 +2,12 @@
 #' @aliases fe.sq
 #' @name fe.sq
 #'
-#' @description Performs the forgotten effects calculation proposed by Kaufman and Gil-Aluja (1988) with multiple experts. The parameters allow you to specify the significant degree of truth and the order of incidence that is required to be calculated for square matrices.
-
+#' @description Perform the forgotten effects calculation proposed by Kaufmann and Gil-Aluja (1988)
+#'  with multiple key informants. Parameters allow you to specify the significant
+#'   degree of truth and the order of incidence that is required to be calculated
+#'   for complete multi-expert graphs. The function returns the frequency of appearance
+#'    of the forgotten effect, its mean incidence, the confidence intervals and the
+#'    standard error in each order.
 #'
 #' @param CC Three-dimensional matrix, where each submatrix along the z-axis is a square and reflective incidence matrix, or a list of data.frames containing square and reflective incidence matrices.
 

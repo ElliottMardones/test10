@@ -46,7 +46,12 @@ byExperts: List of data.frames for each of the generated orders that contains th
 \item{Expert_x}{Dynamic field that represent each of the entered experts.}
 }
 \description{
-Performs the forgotten effects calculation proposed by Kaufman and Gil-Aluja (1988) with multiple experts. The parameters allow you to specify the significant degree of truth and the order of incidence that is required to be calculated for square matrices.
+Perform the forgotten effects calculation proposed by Kaufmann and Gil-Aluja (1988)
+ with multiple key informants. Parameters allow you to specify the significant
+  degree of truth and the order of incidence that is required to be calculated
+  for complete multi-expert graphs. The function returns the frequency of appearance
+   of the forgotten effect, its mean incidence, the confidence intervals and the
+   standard error in each order.
 }
 \details{
 The function extends the theory of forgotten effects proposed by Kaufman and Gil-Aluja

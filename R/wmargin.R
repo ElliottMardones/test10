@@ -110,7 +110,7 @@ wrapper.BootMargin<-function(CC, CE, EE, thr, reps, conf.level, delete, plot){
       if(plot == TRUE){
         myPlot     <- plotBootMargin(dataOutput)
         if( !is.null(CE) & !is.null(EE)){
-          allMatrix <- deconstructMatrix(dataSet = new_CC, AA= CC, AB= CE, BB= EE)
+          allMatrix <- deconstructMatrix(dataSet = new_CC, AA= AA, AB= AB, BB= BB)
           return(list(CC=allMatrix$AA, CE =allMatrix$AB, EE = allMatrix$BB, byRow =  promFilas, byCol = promColumnas,plot = myPlot ))
         }
         dataOutput <- list(Data  = new_CC,
@@ -120,7 +120,7 @@ wrapper.BootMargin<-function(CC, CE, EE, thr, reps, conf.level, delete, plot){
         return(dataOutput)
       }else{
         if( !is.null(CE) & !is.null(EE)){
-          allMatrix <- deconstructMatrix(dataSet = new_CC, AA= CC, AB= CE, BB= EE)
+          allMatrix <- deconstructMatrix(new_CC)
           return(list(CC=allMatrix$AA, CE =allMatrix$AB, EE = allMatrix$BB, byRow =  promFilas, byCol = promColumnas))
         }
         return(list(Data=new_CC, byRow =  promFilas, byCol = promColumnas))

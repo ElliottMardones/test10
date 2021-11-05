@@ -47,13 +47,11 @@ By default plot = FALSE.}
 \value{
 The function returns a list with subsets of data.
 The subset $byRow and $byCol contains the following values:
-\itemize{
- \item{Var: }{Variable name.}
- \item{Mean: }{Calculated mean.}
- \item{LCI: }{Lower Confidence Interval.}
- \item{UCI: }{Upper Confidence Interval.}
- \item{p.value: }{The calculated p-value.}
-}
+ \item{Var}{Variable name.}
+ \item{Mean}{Calculated mean.}
+ \item{LCI}{Lower Confidence Interval.}
+ \item{UCI}{Upper Confidence Interval.}
+ \item{p.value}{The calculated p-value.}
 For delete = TRUE with complete graphs, the function returns $Data, the matrix entered
  in the CC parameter, but with the non-significant rows and columns removed.
 
@@ -86,4 +84,7 @@ bootMargin(CC = AA, thr = 0.5, reps = 500)
 # For chain bipartite graphs the parameters CC, CE and EE are used.
 # For instance:
 bootMargin(CC = AA, CE = AB, EE = BB, thr = 0.5, reps = 500)
+}
+\references{
+https://cran.r-project.org/web/packages/wBoot/index.html
 }

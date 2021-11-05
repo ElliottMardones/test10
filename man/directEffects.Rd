@@ -32,13 +32,11 @@ directEffects(
 \value{
 The function returns a list with subsets of data.
 The $DirectEffects subset contains the following values:
-\itemize{
- \item{From: }{Origin of the incident.}
- \item{To: }{Destination of the incident.}
- \item{Mean: }{Average incidence.}
- \item{UCI: }{Upper Confidence Interval of Incidence.}
- \item{p.value: }{The calculated p-value.}
-}
+ \item{From}{Origin of the incident.}
+ \item{To}{Destination of the incident.}
+ \item{Mean}{Average incidence.}
+ \item{UCI}{Upper Confidence Interval of Incidence.}
+ \item{p.value}{The calculated p-value.}
 
 For delete = TRUE with complete graphs, the function returns $Data, the three-dimensional
  matrix entered in the CC parameter, but assigning 0 to the non-significant edges.
@@ -59,11 +57,13 @@ The function contemplates two modalities, the first is focused on complete graph
 If you use the full graph mode, make sure to keep the default values of the CE and EE parameters.
 }
 \examples{
-
 #' # For complete graphs only the CC parameter is used.
 # For instance:
 directEffects(CC = AA, thr = 0.5, conf.level=0.95, reps = 100, delete = FALSE)
 # For chain bipartite graphs the parameters CC, CE and EE are used.
 # For instance:
 directEffects(CC = AA, CE = AB, EE = BB, thr = 0.5, conf.level=0.95, reps = 100, delete = FALSE)
+}
+\references{
+https://cran.r-project.org/web/packages/wBoot/index.html
 }

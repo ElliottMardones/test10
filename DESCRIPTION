@@ -1,6 +1,6 @@
 Package: test10
 Type: Package
-Title: DOS TREINTA Y CINCO am
+Title: Testo10 Paqueton
 Version: 0.1.0
 Authors@R: c(person("Elliott", "Mardones", email = "emardones2016@alu.uct.cl", role = c("aut", "cre")),
               person("Julio", "Rojas-Mora", email = "jrojas@inf.uct.cl", role = "aut"))
@@ -12,7 +12,7 @@ Description: La biblioteca <nombre.pkg> extiende la teoría de los efectos olvid
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: Rcpp (>= 1.0.7), igraph, parallel, wBoot, poweRlaw, boot, ggplot2, ggsci,ggrepel
+Imports: Rcpp (>= 1.0.7), igraph, wBoot, poweRlaw, boot, ggplot2, ggsci,ggrepel
 LinkingTo: Rcpp
 RoxygenNote: 7.1.2
 Depends: 

@@ -40,23 +40,26 @@
 #'The model parameter makes use of the PoweRlaw package. For "conpl" the median of a power distribution is calculated according to Newman, M. E. (2005), or "conlnorm" can be used according to Gillespie CS (2015). In the event that either of the two statistical methods fails, the error will be reported and the median centrality will be calculated.
 #'
 #'The parallel and ncpus options are not available on Windows operating systems.
-
 #'
 #' @return Returns a data.frame containing the following:
-##' \itemize{
-##'  \item{Median: }{Calculated median.}
-##'  \item{LCI: }{Lower confidence interval.}
-##'  \item{UCI: }{Upper confidence interval.}
-##'  \item{Method: }{Statistical method used.}
-##' }
+##'  \item{Median}{Calculated median.}
+##'  \item{LCI}{Lower confidence interval.}
+##'  \item{UCI}{Upper confidence interval.}
+##'  \item{Method}{Statistical method used.}
 #' @export
+#' @references
+#' Canty A, Ripley BD (2021). boot: Bootstrap R (S-Plus) Functions. R package version 1.3-28.
+#' Csardi G, Nepusz T (2006). “The igraph software package for complex network research.” InterJournal, Complex Systems, 1695
+#' Gillespie CS (2015). “Fitting Heavy Tailed Distributions: The poweRlaw Package.” Journal of Statistical Software, 64(2), 1–16.
+#' Newman, M. E. (2005). Power laws, Pareto distributions and Zipf's law. Contemporary physics, 46(5), 323-351.
+#'
 #' @examples
 #' # For complete graphs only the CC parameter is used.
 #' # For instance:
 #' centrality( CC = AA, model = "median", reps = 100, parallel = "no", ncpus = 1)
 #' # For chain bipartite graphs the parameters CC, CE and EE are used.
 #' # For instance:
-#' centrality( CC = AA, CE = AB, EE= BB, model = "median", reps = 50)
+#' centrality( CC = AA, CE = AB, EE= BB, model = "median", reps = 100)
 centrality <- function(CC, CE = NULL, EE = NULL, model = c("conpl", "conlnorm","median") , reps = 10000, conf = 0.95, parallel=c("multicore","snow","no") , ncpus = 1){
   output <- bootCent( CC = CC, CE = CE, EE = EE, model = model, reps =reps, conf = conf, parallel = parallel, ncpus = ncpus)
   return(output)

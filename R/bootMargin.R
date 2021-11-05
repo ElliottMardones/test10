@@ -42,13 +42,11 @@
 #' @return
 #' The function returns a list with subsets of data.
 #' The subset $byRow and $byCol contains the following values:
-##' \itemize{
-##'  \item{Var: }{Variable name.}
-##'  \item{Mean: }{Calculated mean.}
-##'  \item{LCI: }{Lower Confidence Interval.}
-##'  \item{UCI: }{Upper Confidence Interval.}
-##'  \item{p.value: }{The calculated p-value.}
-##' }
+##'  \item{Var}{Variable name.}
+##'  \item{Mean}{Calculated mean.}
+##'  \item{LCI}{Lower Confidence Interval.}
+##'  \item{UCI}{Upper Confidence Interval.}
+##'  \item{p.value}{The calculated p-value.}
 ##' For delete = TRUE with complete graphs, the function returns $Data, the matrix entered
 ##'  in the CC parameter, but with the non-significant rows and columns removed.
 #'
@@ -61,6 +59,9 @@
 #'associated with $byCol and on the Y axis "influence" associated with $byRow.
 #'
 #' @export
+#'
+#' @references
+#' https://cran.r-project.org/web/packages/wBoot/index.html
 #' @examples
 #' # For complete graphs only the CC parameter is used.
 #' # For instance:

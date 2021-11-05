@@ -3,23 +3,28 @@
 \docType{data}
 \name{BB}
 \alias{BB}
-\title{BB}
+\title{Public policy data on air pollution in the Valdivia commune, Chile.}
 \format{
-A data frame with 53940 rows and 10 variables:
+Three-dimensional matrix with 4 behavior and 10 key experts
 \describe{
-  \item{price}{price, in US dollars}
-  \item{carat}{weight of the diamond, in carats}
-  ...
+  \item{B1}{ People improve thermal insulation of houses}
+  \item{B2}{ People improve firewood combustion equipment efficiency and its components}
+  \item{B3}{ People improve firewood quality and availability of other combustibles}
+  \item{B4}{ Education and awareness in the community}
 }
-}
-\source{
-\url{http://www.diamondse.info/}
 }
 \usage{
 BB
 }
 \description{
-A dataset containing the prices and other attributes of almost 54,000
-diamonds.
+We illustrate the use of the <package.name> package with data on public
+ policies on air pollution from the Valdivia commune, Chile. Studied by Manna, E. M et al (2018)
+  where incentives were considered to promote behavior change in public policy on air pollution.
+}
+\details{
+BB
+}
+\references{
+Nicolas, C., Rojas-Mora, J., & Valenzuela-Fernandez, L. (2020). Causal relationships between economic activity and the mining industry in Chile. Journal of Intelligent & Fuzzy Systems, 38(5), 5405-5412.
 }
 \keyword{datasets}

@@ -8,11 +8,10 @@
 
 ## Description
 
-The \<name.pkg> library extends the theory of forgotten effects for
-multiple key informants with complete graphs and chain bipartite graphs.
-Provides analysis tools of left one-sided significance for edges,
-two-sided significance for nodes, and median betweenness centrality for
-first-order matrices.
+The foRgotten library extends the theory of forgotten effects with the
+aggregation of multiple key informants for complete graphs and chained
+bipartite graphs. Provides analysis tools for direct effects and
+forgotten effects.
 
 The package allows for:
 
@@ -21,9 +20,8 @@ The package allows for:
     effects.
 -   Calculation of the median betweenness centrality per node for direct
     effects.
--   Missing effects calculation with aggregation of multiple key
-    informants.
--   Use of complete graphs and chain bipartite graphs.
+-   Calculation of the forgotten effects.
+-   Use of complete graphs and chained bipartite graphs.
 
 ## Authors
 
@@ -34,11 +32,10 @@ Rudecindo Ortega 02351
 Temuco, Chile  
 <emardones2016@inf.uct.cl>
 
-**Julio Rojas-Mora**  
-Department of Computer Science  
+**Julio Rojas-Mora** Department of Computer Science  
 Universidad Católica de Temuco  
-Rudecindo Ortega 02351   Temuco, Chile  
-and   Centro de Políticas Públicas  
+Rudecindo Ortega 02351 Temuco, Chile  
+and Centro de Políticas Públicas  
 Universidad Católica de Temuco  
 Temuco, Chile  
 <jrojas@inf.uct.cl>
@@ -48,20 +45,20 @@ Temuco, Chile
 You can install the stable version of \<package.name> from CRAN with:
 
 ``` r
-# install.packages(“<package.name>”)
+# install.packages(“foRgotten”)
 ```
 
 and the development version from GitHub with:
 
 ``` r
 #install.packages(“devtools”)
-#devtools::install_github("ElliottMardones/<package.name>")
+#devtools::install_github("ElliottMardones/foRgotten")
 ```
 
 ## Usage
 
 ``` r
-library(test10)
+library(test10)#cambiar a foRgotten despues
 ```
 
 ## 
@@ -75,9 +72,9 @@ The package provides five functions:
 #> starting httpd help server ... done
 ```
 
-Calculates mean incidence, left one-sided confidence interval and
-p-value with multiple key informants for complete networks and chain
-bipartite networks. For more details, see help(de.sq).
+Computes the mean incidence, lower confidence interval, and p-value with
+multiple key informants for complete graphs and chained bipartite
+graphs. For more details, see help (de.sq).
 
 ``` r
 ?bootMargin
@@ -128,8 +125,9 @@ where each of the key informants presented the data with a minimum and
 maximum value for each incident. The description of the data can be seen
 in Tables 1 and 2 of Manna, E. M et al (2018).
 
-The library presents the data with the average between the minimum and
-maximum value for each incidence. For more details of the data you can
+The book store presents the data with the average between the minimum
+and maximum value for each incidence, A being the equivalent to
+incentives and B to behaviors. For more details of the data you can
 consult:
 
 ``` r
@@ -164,9 +162,10 @@ To define the degree of truth in which the incidence is considered
 significant, the parameter `thr` is used, which is defined between
 `[0,1]`. By default `thr = 0.5`.
 
-The `directEffects()` function makes use of the `boot.one.bca` function
-from the `wBoot` package to perform a z-test, bootstrap, and use the BCa
-method. The `conf.level` parameter defines the confidence level and
+The `directEffects()` function makes use of the `“boot.one.bca”`
+function of the `wBoot` package to implement the bootstrap method with
+BCa adjusted boot and with a left one-sided hypothesis test based on the
+Z-test. The `conf.level` parameter defines the confidence level and
 `reps` the number of bootstrap replicas. By default `conf.level = 0.95`
 and `reps = 10000`.
 
@@ -191,13 +190,13 @@ first 6 values are:
 
 ``` r
 head(result$DirectEffects)
-#>   From To  Mean   UCI p.value
-#> 1   I1 I2 0.525 0.640   0.574
-#> 2   I1 I3 0.450 0.600   0.282
-#> 3   I1 I4 0.525 0.665   0.584
-#> 4   I1 I5 0.465 0.635   0.376
-#> 5   I1 I6 0.645 0.795   0.898
-#> 6   I1 I7 0.815 0.875   1.000
+#>   From To  Mean    UCI p.value
+#> 1   I1 I2 0.525 0.6300   0.575
+#> 2   I1 I3 0.450 0.5861   0.293
+#> 3   I1 I4 0.525 0.6654   0.609
+#> 4   I1 I5 0.465 0.6450   0.375
+#> 5   I1 I6 0.645 0.7850   0.895
+#> 6   I1 I7 0.815 0.8700   1.000
 ```
 
 If any of the occurrences have `"NA"` and `"NaN"` values in the UCI and
@@ -301,11 +300,12 @@ To define the degree of truth in which the incidence is considered
 significant, the parameter `thr` is used, which is defined between
 `[0,1]`. By default `thr = 0.5`.
 
-The `bootMargin()` function makes use of the `boot.one.bca` function
-from the `wBoot` package to perform a z-test, apply bootstrapping, and
-the BCa method. The `conf.level` parameter defines the confidence level
-and `reps` the number of bootstrap replicas. By default
-`conf.level = 0.95` and `reps = 10000`.
+The `bootMargin()` function makes use of the `“boot.one.bca”` function
+from the `wBoot` package to implement the bootstrap resampling method
+with BCa adjusted boot and with a two-sided hypothesis test based on the
+Z-test. The `conf.level` parameter defines the confidence level and
+`reps` the number of bootstrap replicas. By default `conf.level = 0.95`
+and `reps = 10000`.
 
 For example, let `thr = 0.6` and `reps = 1000` we get:
 
@@ -330,22 +330,22 @@ For `$byRow`
 ``` r
 result$byRow
 #>    Var      Mean    LCI    UCI  p.value
-#> 1   I1 0.5263240 0.4664 0.5877 1.43e-02
-#> 2   I2 0.5985460 0.5550 0.6537 9.34e-01
-#> 3   I3 0.4267717 0.3631 0.4781 1.33e-04
-#> 4   I4 0.4923750 0.3995 0.5387 1.62e-05
-#> 5   I5 0.5365167 0.4702 0.6014 5.77e-02
-#> 6   I6 0.5538423 0.4817 0.6166 1.84e-01
-#> 7   I7 0.5320407 0.4814 0.5834 1.09e-02
-#> 8   I8 0.5436480 0.4664 0.6086 1.00e-01
-#> 9   I9 0.4615640 0.4019 0.5160 6.58e-04
-#> 10 I10 0.4725780 0.3863 0.5423 1.47e-03
-#> 11 I11 0.5992047 0.5470 0.6421 8.09e-01
-#> 12 I12 0.4546693 0.3887 0.4990 8.52e-05
-#> 13 I13 0.5538873 0.4691 0.6407 3.30e-01
-#> 14 I14 0.2486867 0.2083 0.2956 1.52e-03
-#> 15 I15 0.4430737 0.3943 0.4980 1.58e-03
-#> 16 I16 0.5110577 0.4572 0.5668 3.71e-03
+#> 1   I1 0.5255433 0.4675 0.5875 2.91e-02
+#> 2   I2 0.5994003 0.5515 0.6579 9.66e-01
+#> 3   I3 0.4280310 0.3590 0.4703 7.73e-05
+#> 4   I4 0.4905413 0.4008 0.5421 2.94e-05
+#> 5   I5 0.5344293 0.4717 0.5977 4.30e-02
+#> 6   I6 0.5539760 0.4773 0.6167 1.25e-01
+#> 7   I7 0.5315417 0.4818 0.5835 1.10e-02
+#> 8   I8 0.5427540 0.4663 0.6134 1.13e-01
+#> 9   I9 0.4643607 0.4060 0.5165 4.25e-04
+#> 10 I10 0.4731567 0.3930 0.5400 4.28e-04
+#> 11 I11 0.5974773 0.5503 0.6423 8.91e-01
+#> 12 I12 0.4559787 0.3943 0.4987 6.48e-05
+#> 13 I13 0.5539730 0.4700 0.6363 2.52e-01
+#> 14 I14 0.2485857 0.2049 0.2980 1.44e-03
+#> 15 I15 0.4426557 0.3927 0.4950 1.48e-03
+#> 16 I16 0.5140877 0.4532 0.5627 4.41e-04
 ```
 
 For `$byCol`
@@ -353,22 +353,22 @@ For `$byCol`
 ``` r
 result$byCol
 #>    Var      Mean    LCI    UCI  p.value
-#> 1   I1 0.4823373 0.3523 0.5740 0.009780
-#> 2   I2 0.5550003 0.4417 0.6646 0.514000
-#> 3   I3 0.4182377 0.3170 0.5249 0.001050
-#> 4   I4 0.4685667 0.3538 0.5800 0.022300
-#> 5   I5 0.4630030 0.3578 0.5473 0.000244
-#> 6   I6 0.5881073 0.4205 0.6672 0.755000
-#> 7   I7 0.5574740 0.4534 0.6522 0.386000
-#> 8   I8 0.5762943 0.5127 0.6398 0.435000
-#> 9   I9 0.4473273 0.3490 0.5563 0.007480
-#> 10 I10 0.4680250 0.3625 0.5650 0.010800
-#> 11 I11 0.5765310 0.4343 0.6919 0.712000
-#> 12 I12 0.4534903 0.3413 0.5709 0.011400
-#> 13 I13 0.5618010 0.4763 0.6320 0.326000
-#> 14 I14 0.2736207 0.1868 0.3371 0.000187
-#> 15 I15 0.4736610 0.3453 0.6008 0.053500
-#> 16 I16 0.5928893 0.5149 0.6828 0.857000
+#> 1   I1 0.4803423 0.3666 0.5719 0.011600
+#> 2   I2 0.5521307 0.4294 0.6547 0.384000
+#> 3   I3 0.4186917 0.3133 0.5110 0.000675
+#> 4   I4 0.4692143 0.3539 0.5916 0.039300
+#> 5   I5 0.4575023 0.3578 0.5532 0.000559
+#> 6   I6 0.5872893 0.3857 0.6677 0.733000
+#> 7   I7 0.5562813 0.4408 0.6485 0.417000
+#> 8   I8 0.5743783 0.5063 0.6502 0.478000
+#> 9   I9 0.4531933 0.3364 0.5476 0.002950
+#> 10 I10 0.4636727 0.3800 0.5791 0.018000
+#> 11 I11 0.5774543 0.4310 0.6927 0.724000
+#> 12 I12 0.4563103 0.3341 0.5764 0.014500
+#> 13 I13 0.5636160 0.4761 0.6353 0.330000
+#> 14 I14 0.2733193 0.1853 0.3371 0.000199
+#> 15 I15 0.4720647 0.3593 0.5930 0.040700
+#> 16 I16 0.5914300 0.5164 0.6933 0.915000
 ```
 
 The function allows eliminating causes and effects whose average
@@ -383,30 +383,32 @@ For `$byRow`
 
 ``` r
 result$byRow
-#>    Var      Mean    LCI    UCI  p.value
-#> 2   I2 0.6021757 0.5454 0.6544 0.930000
-#> 6   I6 0.5542453 0.4750 0.6177 0.160000
-#> 7   I7 0.5315227 0.4791 0.5817 0.004610
-#> 8   I8 0.5416957 0.4649 0.6087 0.088300
-#> 11 I11 0.5968757 0.5523 0.6440 0.904000
-#> 13 I13 0.5548707 0.4649 0.6348 0.297000
-#> 15 I15 0.4421407 0.3890 0.4987 0.001630
-#> 16 I16 0.5114433 0.4533 0.5653 0.000857
+#>    Var      Mean    LCI    UCI p.value
+#> 2   I2 0.6003730 0.5477 0.6533 0.97300
+#> 5   I5 0.5336233 0.4730 0.6047 0.07770
+#> 6   I6 0.5536140 0.4790 0.6164 0.17600
+#> 7   I7 0.5302397 0.4799 0.5818 0.00816
+#> 8   I8 0.5435877 0.4643 0.6093 0.10300
+#> 11 I11 0.5974457 0.5538 0.6495 0.94000
+#> 13 I13 0.5542533 0.4753 0.6398 0.26500
+#> 15 I15 0.4408610 0.3917 0.4939 0.00180
+#> 16 I16 0.5129870 0.4541 0.5649 0.00358
 ```
 
 For `$byCol`
 
 ``` r
 result$byCol
-#>    Var      Mean    LCI    UCI p.value
-#> 2   I2 0.5546147 0.4474 0.6623  0.3990
-#> 6   I6 0.5891260 0.4253 0.6700  0.7280
-#> 7   I7 0.5588613 0.4305 0.6560  0.4210
-#> 8   I8 0.5751740 0.5087 0.6370  0.3680
-#> 11 I11 0.5817957 0.4172 0.6873  0.6720
-#> 13 I13 0.5629147 0.4751 0.6272  0.2620
-#> 15 I15 0.4746340 0.3589 0.6052  0.0609
-#> 16 I16 0.5930910 0.5159 0.6855  0.8880
+#>    Var      Mean    LCI    UCI  p.value
+#> 2   I2 0.5552910 0.4249 0.6597 0.422000
+#> 5   I5 0.4609383 0.3559 0.5459 0.000277
+#> 6   I6 0.5878387 0.4093 0.6700 0.776000
+#> 7   I7 0.5558383 0.4350 0.6575 0.390000
+#> 8   I8 0.5744267 0.5113 0.6519 0.487000
+#> 11 I11 0.5760340 0.4348 0.6976 0.745000
+#> 13 I13 0.5614550 0.4846 0.6372 0.364000
+#> 15 I15 0.4726193 0.3480 0.6017 0.061500
+#> 16 I16 0.5929490 0.5190 0.6762 0.887000
 ```
 
 For `delete = TRUE`, the function returns`$Data`, the matrix entered in
@@ -452,26 +454,26 @@ For `$byRow`
 ``` r
 result$byRow
 #>    Var      Mean    LCI    UCI  p.value
-#> 1   I1 0.5154611 0.4742 0.5666 0.002250
-#> 2   I2 0.6294926 0.5769 0.6761 0.280000
-#> 3   I3 0.4559297 0.3976 0.5199 0.001720
-#> 4   I4 0.5100029 0.4413 0.5703 0.008660
-#> 5   I5 0.5467868 0.4907 0.6066 0.088600
-#> 6   I6 0.5821671 0.5108 0.6551 0.642000
-#> 7   I7 0.5722884 0.5224 0.6361 0.402000
-#> 8   I8 0.5715042 0.5063 0.6379 0.402000
-#> 9   I9 0.4794995 0.4104 0.5366 0.000619
-#> 10 I10 0.5178237 0.4408 0.5887 0.036400
-#> 11 I11 0.6558103 0.5984 0.7187 0.062700
-#> 12 I12 0.4791576 0.4209 0.5406 0.000944
-#> 13 I13 0.6241787 0.5318 0.7195 0.581000
-#> 14 I14 0.2442055 0.2026 0.2831 0.000833
-#> 15 I15 0.4593621 0.4137 0.5053 0.000830
-#> 16 I16 0.5269345 0.4809 0.5725 0.002130
-#> 17  B1 0.6787250 0.6000 0.7200 0.201000
-#> 18  B2 0.6810850 0.5700 0.7550 0.234000
-#> 19  B3 0.6757800 0.5500 0.7717 0.539000
-#> 20  B4 0.8082183 0.8000 0.8200 0.000446
+#> 1   I1 0.5151763 0.4697 0.5646 0.004940
+#> 2   I2 0.6292071 0.5810 0.6773 0.214000
+#> 3   I3 0.4569737 0.3939 0.5247 0.001630
+#> 4   I4 0.5099500 0.4502 0.5729 0.002360
+#> 5   I5 0.5479624 0.4920 0.6071 0.075200
+#> 6   I6 0.5819237 0.5146 0.6524 0.621000
+#> 7   I7 0.5735553 0.5188 0.6301 0.381000
+#> 8   I8 0.5724137 0.5017 0.6371 0.414000
+#> 9   I9 0.4796082 0.4162 0.5403 0.002890
+#> 10 I10 0.5159689 0.4442 0.5926 0.030100
+#> 11 I11 0.6527029 0.5970 0.7190 0.069600
+#> 12 I12 0.4782905 0.4124 0.5313 0.000708
+#> 13 I13 0.6236258 0.5380 0.7139 0.589000
+#> 14 I14 0.2443937 0.2040 0.2807 0.000833
+#> 15 I15 0.4595650 0.4187 0.5096 0.001250
+#> 16 I16 0.5279329 0.4812 0.5713 0.001540
+#> 17  B1 0.6780183 0.6000 0.7200 0.203000
+#> 18  B2 0.6784550 0.5700 0.7550 0.152000
+#> 19  B3 0.6737850 0.5500 0.7717 0.493000
+#> 20  B4 0.8084783 0.8000 0.8150 0.000753
 ```
 
 For `$byCol`
@@ -479,26 +481,26 @@ For `$byCol`
 ``` r
 result$byCol
 #>    Var      Mean    LCI    UCI  p.value
-#> 1   I1 0.4801457 0.3582 0.5769 0.005080
-#> 2   I2 0.5558087 0.4342 0.6608 0.463000
-#> 3   I3 0.4211833 0.3201 0.5155 0.001950
-#> 4   I4 0.4686253 0.3602 0.5811 0.022700
-#> 5   I5 0.4642970 0.3479 0.5383 0.001280
-#> 6   I6 0.5867590 0.4361 0.6710 0.778000
-#> 7   I7 0.5554963 0.4438 0.6524 0.402000
-#> 8   I8 0.5722903 0.5153 0.6512 0.582000
-#> 9   I9 0.4466477 0.3557 0.5503 0.007480
-#> 10 I10 0.4661337 0.3658 0.5757 0.019400
-#> 11 I11 0.5786163 0.4261 0.6874 0.672000
-#> 12 I12 0.4561693 0.3386 0.5668 0.018400
-#> 13 I13 0.5620877 0.4776 0.6359 0.319000
-#> 14 I14 0.2727383 0.1948 0.3352 0.000253
-#> 15 I15 0.4758407 0.3476 0.5897 0.034500
-#> 16 I16 0.5924933 0.5143 0.6923 0.891000
-#> 17  B1 0.5435055 0.4398 0.6421 0.217000
-#> 18  B2 0.6752208 0.6082 0.7541 0.022200
-#> 19  B3 0.6882379 0.6355 0.7726 0.000037
-#> 20  B4 0.6283447 0.5247 0.7302 0.584000
+#> 1   I1 0.4792417 0.3635 0.5734 6.79e-03
+#> 2   I2 0.5564770 0.4295 0.6560 3.96e-01
+#> 3   I3 0.4205187 0.3153 0.5110 5.59e-04
+#> 4   I4 0.4689753 0.3438 0.5823 2.54e-02
+#> 5   I5 0.4617787 0.3550 0.5435 1.29e-03
+#> 6   I6 0.5841477 0.4211 0.6725 8.13e-01
+#> 7   I7 0.5578120 0.4368 0.6534 3.89e-01
+#> 8   I8 0.5741100 0.5117 0.6463 4.53e-01
+#> 9   I9 0.4477490 0.3483 0.5648 1.43e-02
+#> 10 I10 0.4680223 0.3611 0.5744 1.92e-02
+#> 11 I11 0.5800763 0.4337 0.7040 7.48e-01
+#> 12 I12 0.4567530 0.3241 0.5566 1.09e-02
+#> 13 I13 0.5640473 0.4715 0.6353 2.79e-01
+#> 14 I14 0.2744593 0.1881 0.3358 1.46e-04
+#> 15 I15 0.4747730 0.3534 0.5854 2.86e-02
+#> 16 I16 0.5927650 0.5120 0.6756 8.81e-01
+#> 17  B1 0.5394645 0.4434 0.6576 3.19e-01
+#> 18  B2 0.6761287 0.6108 0.7687 1.94e-02
+#> 19  B3 0.6904068 0.6339 0.7689 8.56e-05
+#> 20  B4 0.6276187 0.5391 0.7255 5.28e-01
 ```
 
 For `delete = TRUE`, the function returns `$CC`, `$CE`, and `$EE`, which
@@ -531,10 +533,10 @@ matrix represents a complete graph. The `CE`and `EE`parameters are used
 to perform the calculation with chain bipartite graphs, therefore it is
 necessary that these parameters are not used.
 
-The `centrality()` function makes use of the `"boot"` function from the
-boot package (Canty A, Ripley BD, 2021) to perform a t-test, bootstrap,
-and BCa method. The number of bootstrap replicas is defined in the
-`reps`parameter. By default `reps = 10000`.
+The `centrality()` function makes use of the `“boot”` function from the
+boot package (Canty A, Ripley BD, 2021) to implement the bootstrap
+method with BCa tight boot. The number of bootstrap replicas is defined
+in the `reps`parameter. By default `reps = 10000`.
 
 The model parameter allows bootstrapping with some of the following
 statistics: mediate.
@@ -581,22 +583,22 @@ The results are:
 ``` r
 result
 #>    Var     Median       LCI       UCI Method
-#> 1   I1 13.1666667 0.0000000 22.716667 median
-#> 2   I2 12.9875000 1.6919056 24.483674 median
+#> 1   I1 13.1666667 0.0000000 21.358333 median
+#> 2   I2 12.9875000 2.7055613 25.430556 median
 #> 3   I3  0.0000000 0.0000000  0.000000 median
 #> 4   I4  0.8333333 0.0000000  2.079167 median
-#> 5   I5  6.2083333 0.4958333 10.116262 median
-#> 6   I6 20.2791667 2.9847030 36.000000 median
-#> 7   I7 11.0833333 1.7500000 33.392388 median
-#> 8   I8  4.7083333 0.0000000 10.333333 median
+#> 5   I5  6.2083333 0.4958333 10.250000 median
+#> 6   I6 20.2791667 4.8070548 36.000000 median
+#> 7   I7 11.0833333 1.7500000 41.000000 median
+#> 8   I8  4.7083333 0.1000000 10.333333 median
 #> 9   I9  0.0000000 0.0000000  0.000000 median
-#> 10 I10  1.5000000 0.0000000  6.750000 median
-#> 11 I11 15.8333333 3.6666667 30.746733 median
+#> 10 I10  1.5000000 0.0000000  8.125000 median
+#> 11 I11 15.8333333 3.1942299 30.416667 median
 #> 12 I12  0.0000000 0.0000000  0.000000 median
-#> 13 I13  4.7916667 0.5000000 10.784982 median
+#> 13 I13  4.7916667 0.7763065 11.000000 median
 #> 14 I14  0.0000000 0.0000000  0.000000 median
 #> 15 I15  2.5000000 0.0000000  8.583333 median
-#> 16 I16 13.1666667 4.4051587 38.958333 median
+#> 16 I16 13.1666667 2.5833333 28.458333 median
 ```
 
 Now if we use `"conpl"` in the model parameter and 300 bootstrap
@@ -614,22 +616,22 @@ result <- centrality(CC = AA, model = "conpl", reps = 300)
 #> parallel, : Variable I14 has median = 0
 result
 #>    Var     Median       LCI       UCI Method
-#> 1   I1 13.1666667 0.0000000 23.370123 median
-#> 2   I2 12.9875000 1.5493894 24.125000 median
+#> 1   I1 13.1666667 0.0000000 26.221124 median
+#> 2   I2 12.9875000 2.2500000 25.166667 median
 #> 3   I3  0.0000000 0.0000000  0.000000 median
-#> 4   I4  0.8333333 0.0000000  1.995833 median
-#> 5   I5  6.2083333 0.4958333 10.000000 median
-#> 6   I6 20.2791667 4.5607143 42.583333 median
-#> 7   I7 11.0833333 1.7500000 41.000000 median
-#> 8   I8  4.7083333 0.1000000 10.442321 median
+#> 4   I4  0.8333333 0.0000000  3.102966 median
+#> 5   I5  6.2083333 0.6666667 10.655172 median
+#> 6   I6 20.2791667 4.7074397 42.583333 median
+#> 7   I7 11.0833333 1.9107598 41.000000 median
+#> 8   I8  4.7083333 0.1000000 10.833333 median
 #> 9   I9  0.0000000 0.0000000  0.000000 median
 #> 10 I10  1.5000000 0.0000000  8.125000 median
 #> 11 I11 15.8333333 2.6250000 30.416667 median
 #> 12 I12  0.0000000 0.0000000  0.000000 median
-#> 13 I13  4.7916667 0.8448436  9.916667 median
+#> 13 I13  4.7916667 0.5000000 11.000000 median
 #> 14 I14  0.0000000 0.0000000  0.000000 median
-#> 15 I15  2.5000000 0.0000000 14.354167 median
-#> 16 I16 13.1666667 2.5833333 23.479167 median
+#> 15 I15  2.5000000 0.0000000  7.291667 median
+#> 16 I16 13.1666667 2.5833333 28.458333 median
 ```
 
 **Note:** If the calculation cannot be performed with `model = "conpl"`
@@ -650,23 +652,23 @@ result <- centrality(CC = AA, model = "conlnorm", reps = 300)
 #> Warning in conlnorm_function(resultCent = output_resultIgraph, parallel =
 #> parallel, : Variable I14 has median = 0
 result
-#>    Var     Median      LCI       UCI Method
-#> 1   I1 13.1666667 0.000000 21.358333 median
-#> 2   I2 12.9875000 2.250000 25.166667 median
-#> 3   I3  0.0000000 0.000000  0.000000 median
-#> 4   I4  0.8333333 0.000000  3.158333 median
-#> 5   I5  6.2083333 0.662500 10.294139 median
-#> 6   I6 20.2791667 4.560714 42.583333 median
-#> 7   I7 11.0833333 2.000000 41.000000 median
-#> 8   I8  4.7083333 0.200000 10.833333 median
-#> 9   I9  0.0000000 0.000000  0.000000 median
-#> 10 I10  1.5000000 0.000000  8.125000 median
-#> 11 I11 15.8333333 3.666667 30.416667 median
-#> 12 I12  0.0000000 0.000000  0.000000 median
-#> 13 I13  4.7916667 0.500000  9.916667 median
-#> 14 I14  0.0000000 0.000000  0.000000 median
-#> 15 I15  2.5000000 0.000000  8.583333 median
-#> 16 I16 13.1666667 1.719253 28.458333 median
+#>    Var     Median       LCI       UCI Method
+#> 1   I1 13.1666667 0.0000000 21.358333 median
+#> 2   I2 12.9875000 2.2500000 24.125000 median
+#> 3   I3  0.0000000 0.0000000  0.000000 median
+#> 4   I4  0.8333333 0.0000000  1.995833 median
+#> 5   I5  6.2083333 0.4958333 10.000000 median
+#> 6   I6 20.2791667 4.4964274 36.000000 median
+#> 7   I7 11.0833333 1.5000000 31.700000 median
+#> 8   I8  4.7083333 0.1000000 10.833333 median
+#> 9   I9  0.0000000 0.0000000  0.000000 median
+#> 10 I10  1.5000000 0.0000000  8.125000 median
+#> 11 I11 15.8333333 0.6950687 30.416667 median
+#> 12 I12  0.0000000 0.0000000  0.000000 median
+#> 13 I13  4.7916667 0.0000000  9.916667 median
+#> 14 I14  0.0000000 0.0000000  0.000000 median
+#> 15 I15  2.5000000 0.0000000  9.211933 median
+#> 16 I16 13.1666667 2.5833333 28.458333 median
 ```
 
 **Note:** If the calculation cannot be performed with
@@ -711,26 +713,26 @@ result <- centrality(CC = AA, CE = AB, EE = BB, model = "conpl", reps = 300)
 #> parallel, : Variable B1 has median = 0
 result
 #>    Var     Median        LCI       UCI Method
-#> 1   I1 14.0416667  0.0000000 35.000000 median
-#> 2   I2 14.6913273 10.1946668 17.240026  conpl
+#> 1   I1 14.0416667  0.0000000 31.883333 median
+#> 2   I2 14.6913273  7.9899228 17.799567  conpl
 #> 3   I3  0.0000000  0.0000000  0.000000 median
-#> 4   I4  0.9166667  0.1666667 14.479167 median
-#> 5   I5  6.2083333  0.6625000 12.109849 median
-#> 6   I6 24.6720238  4.7778998 60.916667 median
-#> 7   I7  9.2552918  1.1287511 24.966578  conpl
-#> 8   I8  8.2761905  3.7500000 15.000000 median
+#> 4   I4  0.9166667  0.1666667  4.708333 median
+#> 5   I5  6.2083333  0.6710528 13.041667 median
+#> 6   I6 24.6720238  4.5607143 48.975000 median
+#> 7   I7  9.2552918  1.1172637 25.079716  conpl
+#> 8   I8  8.2761905  3.7500000 21.294048 median
 #> 9   I9  0.3750000  0.0000000  3.650000 median
-#> 10 I10  1.5714286  0.3083333  8.125000 median
-#> 11 I11 21.0241962 17.1725831 21.499852  conpl
-#> 12 I12  3.3333333  0.0000000 12.516667 median
-#> 13 I13  5.0166667  0.9930742 14.416667 median
+#> 10 I10  1.5714286  0.1666667  8.125000 median
+#> 11 I11 21.0241962 13.7066578 21.438612  conpl
+#> 12 I12  3.3333333  0.0000000 11.318238 median
+#> 13 I13  5.0166667  1.1428571 14.434524 median
 #> 14 I14  0.0000000  0.0000000  0.000000 median
 #> 15 I15  2.5000000  0.0000000  9.166667 median
-#> 16 I16 18.7916667  2.5833333 34.294048 median
+#> 16 I16 18.7916667  2.5833333 39.019637 median
 #> 17  B1  0.0000000  0.0000000  0.000000 median
-#> 18  B2  2.7833333  1.0000000  7.100000 median
-#> 19  B3  2.0000000  0.2500000  3.196429 median
-#> 20  B4  1.8666667  0.0000000  7.200000 median
+#> 18  B2  2.7833333  1.0000000  5.500000 median
+#> 19  B3  2.0000000  0.5000000  3.333333 median
+#> 20  B4  1.8666667  0.0000000  6.965270 median
 ```
 
 The `centrality()` function implements the parallel function from the
@@ -764,10 +766,10 @@ significant, the parameter `thr`is used, which is defined between
 To define the maximum order of the forgotten effects, use the
 `maxOrder`parameter. By default `maxOrder = 2`.
 
-The `fe.sq()` function uses the `"boot"` function from the boot package
-(Canty A, Ripley BD, 2021) to perform a t-test and bootstrap. The number
-of bootstrap replicas is defined in the `reps` parameter. By default
-`reps = 10000`.
+The `fe.sq()` function makes use of the `“boot”` function from the boot
+package (Canty A, Ripley BD, 2021) to implement bootstrap with BCa tight
+boot. The number of bootstrap replicas is defined in the `reps`
+parameter. By default `reps = 10000`.
 
 For example, let `thr = 0.5`, `maxOrder = 3` and `reps = 1000`, you get:
 
@@ -810,12 +812,12 @@ If we look at the data in the `$boot$Order_2` data subset, we find 706
 ``` r
 head(result$boot$Order_2)
 #>   From Through_1  To Count      Mean    LCI       UCI         SE
-#> 1   I8       I11 I10     4 0.6125000 0.5625 0.6625000 0.02689207
-#> 2   I5       I11 I10     3 0.6166667 0.5500 0.6666667 0.03590382
-#> 3   I6       I11 I14     3 0.6833333 0.6000 0.7666667 0.06875200
-#> 4  I13       I11 I14     3 0.5833333 0.5500 0.6000000 0.01367935
-#> 5  I13        I6  I1     3 0.6333333 0.6000 0.6666667 0.02781541
-#> 6  I13       I16  I1     3 0.6333333 0.6000 0.6666667 0.02745610
+#> 1   I8       I11 I10     4 0.6125000 0.5625 0.6750000 0.02652208
+#> 2   I5       I11 I10     3 0.6166667 0.5500 0.6666667 0.03671591
+#> 3   I6       I11 I14     3 0.6833333 0.6000 0.7666667 0.07021737
+#> 4  I13       I11 I14     3 0.5833333 0.5500 0.6000000 0.01399985
+#> 5  I13        I6  I1     3 0.6333333 0.6000 0.6666667 0.02748039
+#> 6  I13       I16  I1     3 0.6333333 0.6000 0.6666667 0.02785307
 ```
 
 The relations I8 -> I11 -> I10 appeared 4 times. To know exactly in
@@ -877,9 +879,9 @@ significant, the parameter `thr` is used, which is defined between
 To define the maximum order of the forgotten effects, use the
 `maxOrder`parameter. By default `maxOrder = 2`.
 
-The `fe.rect()` function makes use of the `"boot"` function from the
-`boot` package (Canty A, Ripley BD, 2021) to perform a t-test and
-bootstrap. The number of bootstrap replicas is defined in the `reps`
+The `fe.rect()` function makes use of the `“boot”` function from the
+boot package (Canty A, Ripley BD, 2021) to implement bootstrap with BCa
+tight boot.. The number of bootstrap replicas is defined in the `reps`
 parameter. By default `reps = 10000`.
 
 For example, let `thr = 0.5`, `maxOrder = 3` and `reps = 1000`, you get:
@@ -928,12 +930,12 @@ If we look at the data in the `$boot$Order_2` data subset, we find 182
 ``` r
 head(result$boot$Order_2)
 #>   From Through_1 To Count      Mean  LCI       UCI         SE
-#> 1   I5        B4 B1     3 0.6333333 0.60 0.6666667 0.02754025
-#> 2   I6        I7 B1     2 0.8000000 0.75 0.8000000 0.03489434
-#> 3   I8        I7 B1     2 0.6250000 0.60 0.6250000 0.01772889
-#> 4  I12        I2 B1     2 0.7000000 0.65 0.7000000 0.03425322
-#> 5  I10       I11 B2     2 0.5750000 0.55 0.6000000 0.01803567
-#> 6  I14       I15 B2     2 0.7250000 0.70 0.7250000 0.01764090
+#> 1   I5        B4 B1     3 0.6333333 0.60 0.6666667 0.02745863
+#> 2   I6        I7 B1     2 0.8000000 0.75 0.8000000 0.03469411
+#> 3   I8        I7 B1     2 0.6250000 0.60 0.6250000 0.01775705
+#> 4  I12        I2 B1     2 0.7000000 0.65 0.7500000 0.03593144
+#> 5  I10       I11 B2     2 0.5750000 0.55 0.5750000 0.01719826
+#> 6  I14       I15 B2     2 0.7250000 0.70 0.7500000 0.01807081
 ```
 
 The relations I5 -> B4 -> B1 appeared 3 times. To know exactly in which

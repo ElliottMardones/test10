@@ -1,6 +1,6 @@
 Package: test10
 Type: Package
-Title: Testo10 Paqueton
+Title: foRgotten
 Version: 0.1.0
 Authors@R: c(person("Elliott", "Mardones", email = "emardones2016@alu.uct.cl", role = c("aut", "cre")),
               person("Julio", "Rojas-Mora", email = "jrojas@inf.uct.cl", role = "aut"))
